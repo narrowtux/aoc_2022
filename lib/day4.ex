@@ -1,12 +1,9 @@
 defmodule Day4 do
-  import Macros
-
   def solve(input, fun) do
     input
     |> Stream.map(&String.trim/1)
     |> Stream.reject(& &1 == "")
-    |> Stream.flat_map(&String.split(&1, ","))
-    |> Stream.flat_map(&String.split(&1, "-"))
+    |> Stream.flat_map(&String.split(&1, ~r/[,-]/))
     |> Stream.map(&String.to_integer/1)
     |> Stream.chunk_every(2)
     |> Stream.map(&apply(Range, :new, &1))
@@ -15,9 +12,7 @@ defmodule Day4 do
   end
 
   def part_1(input \\ File.stream!("./day4.txt")) do
-    solve(input, fn a, b ->
-      subset?(a, b) or subset?(b, a)
-    end)
+    solve(input, &subset?(&1, &2) or subset?(&2, &1))
   end
 
   def part_2(input \\ File.stream!("./day4.txt")) do
