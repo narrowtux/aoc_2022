@@ -78,10 +78,10 @@ defmodule Day11 do
   end
 
   def iterate_times(monkeys, n, iter) do
-    IO.puts("Iteration #{iter}")
+    # IO.puts("Iteration #{iter}")
     new_monkeys = iteration(monkeys)
-    [top_1, top_2] = new_monkeys |> Enum.map(& &1.inspections) |> Enum.sort(:desc) |> Enum.take(2)
-    IO.puts("  #{top_1}, #{top_2}")
+    # [top_1, top_2] = new_monkeys |> Enum.map(& &1.inspections) |> Enum.sort(:desc) |> Enum.take(2)
+    # IO.puts("  #{top_1}, #{top_2}")
 
     iterate_times(new_monkeys, n - 1, iter + 1)
   end
